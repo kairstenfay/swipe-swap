@@ -4,3 +4,4 @@
 
 roles/public 2019-08-01T00:43:12Z Kairsten Fay <kairsten.fay@gmail.com> # Access for the standard pseudo-role "public"
 warehouse/schema 2019-08-01T01:04:05Z Kairsten Fay <kairsten.fay@gmail.com> # Schema for warehouse data
+warehouse/individual [warehouse/schema] 2019-08-01T01:18:15Z Kairsten Fay <kfay@fredhutch.org> # Create individual table
