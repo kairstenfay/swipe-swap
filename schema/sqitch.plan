@@ -2,4 +2,5 @@
 %project=swipe-swap/schema
 %uri=http://github.com/kairstenfay/swipe-swap/
 
-roles/public 2019-08-01T00:43:12Z Kairsten Fay <kfay@fredhutch.org> # Access for the standard pseudo-role "public"
+roles/public 2019-08-01T00:43:12Z Kairsten Fay <kairsten.fay@gmail.com> # Access for the standard pseudo-role "public"
+warehouse/schema 2019-08-01T01:04:05Z Kairsten Fay <kairsten.fay@gmail.com> # Schema for warehouse data
