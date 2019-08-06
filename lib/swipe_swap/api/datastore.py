@@ -52,6 +52,30 @@ def login(username: str, password: str) -> DatabaseSession:
 
 
 @export
+@catch_permission_denied
+def store_individual(session: DatabaseSession, data: dict) -> None:
+    """
+    Store the given individual *data* in the database using *session*.
+
+    Raises a :class:`BadRequestDatabaseError` exception if the given *data*
+    isn't valid and a :class:`Forbidden` exception if the database reports a
+    `permission denied` error.
+    """
+    with session, session.cursor() as cursor:
+        try:
+            cursor.execute("""
+                insert into warehouse.individual (username, first_name, last_name, details)
+                    values (%(username)s, %(first_name)s, %(last_name)s, %(details)s)
+                """, data)
+
+        except (DataError, IntegrityError) as error:
+            raise BadRequestDatabaseError(error) from None
+
+        except TypeError as error:
+            raise Exception(f"{type(data)}, {error}")
+
+
+@export
 class BadRequestDatabaseError(BadRequest):
     """
     Subclass of :class:`swipe-swap.api.exceptions.BadRequest` which takes a
