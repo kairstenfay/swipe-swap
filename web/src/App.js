@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CreateAccount from './components/CreateAccount';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           </div>
         </div>
       </header>
-      <button type="button" class="btn btn-primary">Join</button>
+      <CreateAccount />
     </div>
   );
 }
