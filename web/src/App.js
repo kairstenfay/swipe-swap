@@ -12,7 +12,7 @@ function App() {
             <div className="col-xs-2">
               <img src={logo} className="App-logo" alt="logo" />
             </div>
-            <div class="col-xs-6">
+            <div className="col-xs-6">
               Bartering Made Easy - Swipe, Swap, Sweet.
             </div>
           </div>
