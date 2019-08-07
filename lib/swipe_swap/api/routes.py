@@ -4,20 +4,20 @@ API route definitions.
 import json
 import logging
 from flask import Blueprint, request, send_file
+from flask_cors import CORS, cross_origin
 from . import datastore
 from .utils.routes import authenticated_datastore_session_required, content_types_accepted, check_content_length
 
 
 LOG = logging.getLogger(__name__)
 
-api_v1 = Blueprint('api_v1', 'api_v1', url_prefix='/v1')
-api_unversioned = Blueprint('api', 'api', url_prefix='/')
+api_v1 = Blueprint('api_v1', 'api_v1', url_prefix='/api/v1')
+api_unversioned = Blueprint('api', 'api', url_prefix='/api')
 
 blueprints = [
     api_v1,
     api_unversioned,
 ]
-
 
 @api_unversioned.route("/", methods = ['GET'])
 def index():
@@ -27,10 +27,11 @@ def index():
     return send_file("static/index.html", "text/html; charset=UTF-8")
 
 
-@api_v1.route("/create/individual", methods = ['POST'])
+@api_v1.route("/individual", methods = ['POST'])
 @content_types_accepted(["application/json"])
 @check_content_length
 @authenticated_datastore_session_required
+@cross_origin()
 def individual(*, session):
     """
     Receive a new individual entity.
@@ -40,7 +41,6 @@ def individual(*, session):
     will check its validity.
     """
     data = json.loads(request.get_data(as_text = True))
-
     LOG.debug(f"Received individual {data}")
 
     datastore.store_individual(session, data)

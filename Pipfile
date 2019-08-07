@@ -12,6 +12,7 @@ flask = "*"
 psycopg2 = ">=2.8,<3"
 requests = "*"
 click = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.6"
