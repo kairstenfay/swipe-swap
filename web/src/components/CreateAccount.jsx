@@ -4,14 +4,13 @@ import '../App.css';
 class CreateAccount extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {firstname: '', lastname: '', username: ''};
+        this.state = {first_name: '', last_name: '', username: '', details: {}};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        console.log(event.target.name);
         const state = {};
         state[event.target.name] = event.target.value;
 
@@ -19,18 +18,28 @@ class CreateAccount extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
+        console.log(JSON.stringify(this.state));
 
-        fetch('https://localhost:5000/api/v1/individual', {
+        fetch('http://localhost:5000/api/v1/individual', {
+            mode: 'cors',
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                "firstname": "Jane",
-            })
+            body: {
+                username: 'test',
+                password: '123',
+                data: this.state,
+            }
         })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json)
+        })
+        .catch(error => {
+            console.log(error);
+        });
         alert('An account was created: ' + this.state.username);
         event.preventDefault();
     }
@@ -41,12 +50,12 @@ class CreateAccount extends React.Component {
                 <form action="/success" onSubmit={this.handleSubmit}>
                     <label>
                         First name:
-                        <input type="text" name="firstname" value={this.state.firstname}
+                        <input type="text" name="first_name" value={this.state.firstname}
                             onChange={this.handleChange} />
                     </label>
                     <label>
                         Last name:
-                        <input type="text" name="lastname" value={this.state.lastname}
+                        <input type="text" name="last_name" value={this.state.lastname}
                             onChange={this.handleChange} />
                     </label>
                     <label>
