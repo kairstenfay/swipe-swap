@@ -1,6 +1,7 @@
 """
 Datastore abstraction for our database.
 """
+import json
 import logging
 import psycopg2
 from functools import wraps
@@ -61,6 +62,8 @@ def store_individual(session: DatabaseSession, data: dict) -> None:
     isn't valid and a :class:`Forbidden` exception if the database reports a
     `permission denied` error.
     """
+    data['details'] = json.dumps(data['details'])
+
     with session, session.cursor() as cursor:
         try:
             cursor.execute("""
