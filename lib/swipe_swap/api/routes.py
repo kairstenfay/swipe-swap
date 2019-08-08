@@ -4,7 +4,6 @@ API route definitions.
 import json
 import logging
 from flask import Blueprint, request, send_file
-from flask_cors import CORS, cross_origin
 from . import datastore
 from .utils.routes import authenticated_datastore_session_required, content_types_accepted, check_content_length
 
@@ -31,7 +30,6 @@ def index():
 @content_types_accepted(["application/json"])
 @check_content_length
 @authenticated_datastore_session_required
-@cross_origin()
 def individual(*, session):
     """
     Receive a new individual entity.
