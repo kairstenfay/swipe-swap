@@ -4,7 +4,7 @@ import '../App.css';
 class CreateAccount extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {first_name: '', last_name: '', username: '', details: {}};
+        this.state = {first_name: '', last_name: '', username: '', details: {}}; // TODO: email
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,12 +26,9 @@ class CreateAccount extends React.Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + btoa("test:123"),
             },
-            body: {
-                username: 'test',
-                password: '123',
-                data: this.state,
-            }
+            body: JSON.stringify(this.state)
         })
         .then(response => response.json())
         .then(json => {
